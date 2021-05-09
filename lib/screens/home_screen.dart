@@ -1,5 +1,6 @@
 import 'package:Netflix_UI/models/movie_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    super.initState();
     _pageController = PageController(initialPage: 1, viewportFraction: 0.8);
   }
 
@@ -48,10 +50,33 @@ class HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               child: Center(
-                child: Hero(tag: null, child: null),
+                child: Hero(
+                  tag: movies[index].imageUrl,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image(
+                      image: AssetImage(movies[index].imageUrl),
+                      height: 220.0,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
+          Positioned(
+              left: 25.0,
+              bottom: 40.0,
+              child: Container(
+                width: 260.0,
+                child: Text(
+                  movies[index].title,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 17.0),
+                ),
+              ))
         ],
       ),
     );
@@ -108,6 +133,45 @@ class HomeScreenState extends State<HomeScreen> {
                 itemCount: movies.length,
                 itemBuilder: (BuildContext context, int index) {
                   return _movieSelector(index);
+                }),
+          ),
+          Container(
+            height: 90.0,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    width: 160.0,
+                    margin: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.red[400],
+                          Colors.red[600],
+                          Colors.red[800]
+                        ],
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.red[400],
+                            offset: Offset(0.0, 3.0),
+                            blurRadius: 6.0)
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        labels[index],
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16.0,
+                            letterSpacing: 1.8),
+                      ),
+                    ),
+                  );
                 }),
           ),
         ],
