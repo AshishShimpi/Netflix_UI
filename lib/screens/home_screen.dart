@@ -1,6 +1,8 @@
 import 'package:Netflix_UI/models/movie_model.dart';
+import 'package:Netflix_UI/screens/movie_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:Netflix_UI/widgets/content_scroll.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -49,15 +51,25 @@ class HomeScreenState extends State<HomeScreen> {
                       blurRadius: 10.0),
                 ],
               ),
-              child: Center(
-                child: Hero(
-                  tag: movies[index].imageUrl,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Image(
-                      image: AssetImage(movies[index].imageUrl),
-                      height: 220.0,
-                      fit: BoxFit.cover,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => MovieScreen(movie: movies[index]),
+                    ),
+                  );
+                },
+                child: Center(
+                  child: Hero(
+                    tag: movies[index].imageUrl,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image(
+                        image: AssetImage(movies[index].imageUrl),
+                        height: 220.0,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -137,8 +149,11 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           Container(
             height: 90.0,
+            // color: Colors.black,
             child: ListView.builder(
+                itemCount: labels.length,
                 scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.only(left: 20.0),
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     width: 160.0,
@@ -149,9 +164,9 @@ class HomeScreenState extends State<HomeScreen> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.red[400],
-                          Colors.red[600],
-                          Colors.red[800]
+                          Colors.red[500],
+                          Colors.red[700],
+                          Colors.red[900]
                         ],
                       ),
                       boxShadow: [
@@ -173,6 +188,19 @@ class HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 }),
+          ),
+          SizedBox(height: 10.0),
+          ContentScroll(
+            title: 'My List',
+            images: myList,
+            imgheight: 250,
+            imgwidth: 150.0,
+          ),
+          ContentScroll(
+            title: 'Popular',
+            images: popular,
+            imgheight: 250,
+            imgwidth: 150.0,
           ),
         ],
       ),
