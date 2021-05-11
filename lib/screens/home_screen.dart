@@ -77,18 +77,19 @@ class HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-              left: 25.0,
-              bottom: 40.0,
-              child: Container(
-                width: 260.0,
-                child: Text(
-                  movies[index].title,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 17.0),
-                ),
-              ))
+            left: 25.0,
+            bottom: 40.0,
+            child: Container(
+              width: 260.0,
+              child: Text(
+                movies[index].title,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 17.0),
+              ),
+            ),
+          )
         ],
       ),
     );
